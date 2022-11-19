@@ -19,8 +19,8 @@
         $(function() {
             var socket = null;
             var msgBox = $("#chatbox textarea");
-            var messages = $("#message");
-            &("#chatbox").submit(function(){
+            var messages = $("#messages");
+            $("#chatbox").submit(function(){
                 if(!msgBox.val()) return falase;
                 if(!socket){
                     alert("エラー: WebSocket接続が行われていません。");
@@ -33,12 +33,12 @@
             if(!window["WebSocket"]){
                 alert("エラー: WebSocketに対応していないブラウザです。");
             } else {
-                socket = new WebSocket("ws://localhost:8080/room");
+                socket = new WebSocket("ws://{{.Host}}/room");
                 socket.onclose = function() {
                     alert("接続が終了しました。")
                 }
                 socket.onmessage = function(e) {
-                    messgaes.append($("<li>").text(e.data));
+                    messages.append($("<li>").text(e.data));
                 }
             }
         });
