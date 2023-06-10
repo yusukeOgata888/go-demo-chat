@@ -1,12 +1,17 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
-	"text/template"
 	"path/filepath"
 	"sync"
-	"flag"
+	"text/template"
+
+	"github.com/stretchr/gomniauth"
+	"github.com/stretchr/gomniauth/providers/facebook"
+	"github.com/stretchr/gomniauth/providers/github"
+	"github.com/stretchr/gomniauth/providers/google"
 )
 
 // テンプレートを表す。
@@ -26,8 +31,19 @@ func (t *templateHandler)  ServeHTTP(w http.ResponseWriter, r *http.Request){
 func main() {
 	var addr = flag.String("addr", ":8080", "アプリケーションのアドレス")
 	flag.Parse()
+
+	// Gomniauthのセットアップ
+	gomniauth.SetSecurityKey("セキュリティキー")
+	gomniauth.WithProviders(
+		facebook.New("265709657757-jogbr1g7fmvhhdsvbgjdfg4jncejo87e.apps.googleusercontent.com","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", "http://localhost:8080/auth/callback/facebook"),
+		github.New("265709657757-jogbr1g7fmvhhdsvbgjdfg4jncejo87e.apps.googleusercontent.com","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","http://localhost:8080/auth/callback/github"),
+		google.New("265709657757-jogbr1g7fmvhhdsvbgjdfg4jncejo87e.apps.googleusercontent.com","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","http://localhost:8080/auth/callback/google"),
+	)
 	r := newRoom()
-	http.Handle("/", &templateHandler{filename: "chat.html"})
+	// http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
+	http.Handle("/chat", &templateHandler{filename: "chat.html"})
+	http.Handle("/login", &templateHandler{filename: "login.html"})
+	http.HandleFunc("/auth/",loginHandler)
 	http.Handle("/room", r)
 	// チャットルームを開始します。
 	go r.run()
