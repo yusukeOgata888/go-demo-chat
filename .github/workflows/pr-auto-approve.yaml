@@ -1,21 +1,23 @@
-name: Approve
+name: Auto Approve
 
 on:
   pull_request:
-    types: [ review_requested ]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
 
 jobs:
   approve:
-    runs-on: ubuntu-20.04
-    timeout-minutes: 1
-    if: ${{ github.event.requested_reviewer.login == 'approve-bot' }}
+    if: |
+      github.event.pull_request.user.login == github.repository_owner
+      && ! github.event.pull_request.draft
     env:
       GH_TOKEN: ${{ github.token }}
       NUMBER: ${{ github.event.number }}
-
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
-      - uses: actions/checkout@v2
-      - run: gh pr review $NUMBER --approve
-      - run: gh pr edit $NUMBER --remove-reviewer $REVIEWER
-        env:
-          REVIEWER: ${{ github.event.requested_reviewer.login }}
+      - uses: hmarr/auto-approve-action@v3
