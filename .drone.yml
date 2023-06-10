@@ -12,5 +12,4 @@ steps:
   - go get github.com/stretchr/gomniauth/providers/google
   - go test
   - go build main.go auth.go client.go room.go
-  - go run main.go auth.go client.go room.go
 
