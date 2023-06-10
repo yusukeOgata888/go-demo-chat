@@ -1,9 +1,11 @@
 package main
+
 import (
+	"fmt"
+	"log"
 	"net/http"
 	"strings"
-	"log"
-	"fmt"
+
 	"github.com/stretchr/gomniauth"
 )
 
