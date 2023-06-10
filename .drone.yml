@@ -6,11 +6,11 @@ steps:
   image: golang
   commands:
   - cd src/chat
-  - go test
   - go get github.com/stretchr/gomniauth
   - go get github.com/stretchr/gomniauth/providers/facebook
   - go get github.com/stretchr/gomniauth/providers/github
   - go get github.com/stretchr/gomniauth/providers/google
+  - go test
   - go build main.go auth.go client.go room.go
   - go run main.go auth.go client.go room.go
 
