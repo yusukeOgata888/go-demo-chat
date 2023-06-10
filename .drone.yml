@@ -6,7 +6,6 @@ steps:
   image: golang
   commands:
   - cd src/chat
-  - go mod init
   - go test
   - go build main.go auth.go client.go room.go
   - go run main.go auth.go client.go room.go
