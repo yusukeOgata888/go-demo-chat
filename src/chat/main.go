@@ -33,15 +33,14 @@ func main() {
 	flag.Parse()
 
 	// Gomniauthのセットアップ
-	gomniauth.SetSecurityKey("セキュリティキー")
+	gomniauth.SetSecurityKey("OgaYu@5247")
 	gomniauth.WithProviders(
 		facebook.New("265709657757-jogbr1g7fmvhhdsvbgjdfg4jncejo87e.apps.googleusercontent.com","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", "http://localhost:8080/auth/callback/facebook"),
 		github.New("265709657757-jogbr1g7fmvhhdsvbgjdfg4jncejo87e.apps.googleusercontent.com","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","http://localhost:8080/auth/callback/github"),
-		google.New("265709657757-jogbr1g7fmvhhdsvbgjdfg4jncejo87e.apps.googleusercontent.com","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","http://localhost:8080/auth/callback/google"),
+		google.New("978332130435-5r3irau9dpblnhtjl90rev51l0e1qdkf.apps.googleusercontent.com","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","http://localhost:8080/auth/callback/google"),
 	)
 	r := newRoom()
-	// http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
-	http.Handle("/chat", &templateHandler{filename: "chat.html"})
+	http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
 	http.Handle("/login", &templateHandler{filename: "login.html"})
 	http.HandleFunc("/auth/",loginHandler)
 	http.Handle("/room", r)
