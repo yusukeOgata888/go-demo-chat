@@ -3,9 +3,9 @@ type: docker
 name: test
 
 trigger:
-  event:
-    - pull_request
-    - push
+  ref:
+    - refs/head/master
+    - refs/head/develop
 
 steps:
 - name: test
