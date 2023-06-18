@@ -6,6 +6,7 @@ trigger:
   ref:
     - refs/head/master
     - refs/head/develop
+    - refs/pull/** 
 
 steps:
 - name: test
