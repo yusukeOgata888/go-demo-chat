@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: build docker image
 
 trigger:
   ref:
@@ -11,11 +11,12 @@ trigger:
 steps:
 - name: test
   image: golang
-  commands:
-  - cd src/chat
-  - go get github.com/stretchr/gomniauth
-  - go get github.com/stretchr/gomniauth/providers/facebook
-  - go get github.com/stretchr/gomniauth/providers/github
-  - go get github.com/stretchr/gomniauth/providers/google
-  - go test
-  - go build main.go auth.go client.go room.go
+  settings:
+    dockerfile: Dockerfile
+  # - cd src/chat
+  # - go get github.com/stretchr/gomniauth
+  # - go get github.com/stretchr/gomniauth/providers/facebook
+  # - go get github.com/stretchr/gomniauth/providers/github
+  # - go get github.com/stretchr/gomniauth/providers/google
+  # - go test
+  # - go build main.go auth.go client.go room.go

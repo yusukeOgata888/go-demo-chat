@@ -66,16 +66,16 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 			log.Fatalln("ユーザーの取得に失敗しました。", provider, "-", err)
 		}
 
-		authCookiValue := objx.New(map[string]interface{}{
+		authCookieValue := objx.New(map[string]interface{}{
 			"name": user.Name(),
 		}).MustBase64()
 		http.SetCookie(w, &http.Cookie{
 			Name: "auth",
-			Value: authCookiValue,
+			Value: authCookieValue,
 			Path: "/"})
+		log.Printf("user.name",user.Name())
 		w.Header()["Location"]=[]string{"/chat"}
 		w.WriteHeader(http.StatusTemporaryRedirect)
-
 
 	default:
 		w.WriteHeader(http.StatusNotFound)
