@@ -11,8 +11,13 @@ trigger:
 steps:
 - name: test
   image: golang
+  repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox
+  registory: https://os3-318-48873.vs.sakura.ne.jp:447
+  usrname: admin
+  password: OgaYu@5247
   settings:
     dockerfile: Dockerfile
+
   # - cd src/chat
   # - go get github.com/stretchr/gomniauth
   # - go get github.com/stretchr/gomniauth/providers/facebook
