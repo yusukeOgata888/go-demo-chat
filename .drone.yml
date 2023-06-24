@@ -11,7 +11,7 @@ trigger:
 steps:
 - name: test
   image: golang
-    settings:
+  settings:
     repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox
     registory: https://os3-318-48873.vs.sakura.ne.jp:447
     usrname: admin
