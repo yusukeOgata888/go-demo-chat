@@ -13,8 +13,8 @@ steps:
   image: golang
   settings:
     repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox
-    registory: https://os3-318-48873.vs.sakura.ne.jp:447
-    usrname: admin
+    registory: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox/golang
+    username: admin
     password: OgaYu@5247
     tags:
       - "${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}"
