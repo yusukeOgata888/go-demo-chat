@@ -12,14 +12,17 @@ steps:
 - name: test
   image: golang
   settings:
-    repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox
-    registory: --insecure-registry https://os3-318-48873.vs.sakura.ne.jp:447/sandbox/golang
+    repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox/golang
+    registory: --insecure-registry https://os3-318-48873.vs.sakura.ne.jp:447
     username: admin
     password: OgaYu@5247
     tags:
       - "${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}"
       - "latest"
     dockerfile: Dockerfile
+
+  script:
+    ./build.sh
 
   # - cd src/chat
   # - go get github.com/stretchr/gomniauth
