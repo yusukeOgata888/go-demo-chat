@@ -8,18 +8,21 @@ trigger:
   - refs/heads/**
   - refs/pull/*/head
 
-steps:
-- name: test
-  image: golang
-  settings:
-    repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox/golang
-    registory: --insecure-registry https://os3-318-48873.vs.sakura.ne.jp:447
-    username: admin
-    password: OgaYu@5247
-    tags:
-      - "${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}"
-      - "latest"
-    dockerfile: Dockerfile
+# steps:
+# - name: test
+#   image: golang
+#   settings:
+#     repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox/golang
+#     registory: --insecure-registry https://os3-318-48873.vs.sakura.ne.jp:447
+#     username: admin
+#     password: OgaYu@5247
+#     tags:
+#       - "${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}"
+#       - "latest"
+#     dockerfile: Dockerfile
+
+env:
+  - DOCKER_DAEMON_ARGS=--insecure-registry https://os3-318-48873.vs.sakura.ne.jp:447
 
   script:
     ./build.sh
