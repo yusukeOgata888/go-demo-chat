@@ -25,7 +25,7 @@ env:
   - DOCKER_DAEMON_ARGS=--insecure-registry https://os3-318-48873.vs.sakura.ne.jp:447
 
 script:
-  ./build.sh
+  - ./build.sh
 
   # - cd src/chat
   # - go get github.com/stretchr/gomniauth
