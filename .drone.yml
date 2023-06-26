@@ -8,15 +8,12 @@ trigger:
   - refs/heads/**
   - refs/pull/*/head
 
-env:
-  - DOCKER_DAEMON_ARGS=--insecure-registry https://os3-318-48873.vs.sakura.ne.jp:447
-
 steps:
 - name: test
   image: golang
   settings:
     repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox
-    registory: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox/golang
+    registory: --insecure-registry https://os3-318-48873.vs.sakura.ne.jp:447/sandbox/golang
     username: admin
     password: OgaYu@5247
     tags:
