@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: build docker image
 
 trigger:
   ref:
@@ -11,11 +11,23 @@ trigger:
 steps:
 - name: test
   image: golang
-  commands:
-  - cd src/chat
-  - go get github.com/stretchr/gomniauth
-  - go get github.com/stretchr/gomniauth/providers/facebook
-  - go get github.com/stretchr/gomniauth/providers/github
-  - go get github.com/stretchr/gomniauth/providers/google
-  - go test
-  - go build main.go auth.go client.go room.go
+  settings:
+    repo: https://os3-318-48873.vs.sakura.ne.jp:447/sandbox/golang
+    registory: https://os3-318-48873.vs.sakura.ne.jp:447
+    username: admin
+    password: OgaYu@5247
+    tags:
+      - "${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}"
+      - "latest"
+    dockerfile: Dockerfile
+
+script:
+  - ./build.sh
+
+  # - cd src/chat
+  # - go get github.com/stretchr/gomniauth
+  # - go get github.com/stretchr/gomniauth/providers/facebook
+  # - go get github.com/stretchr/gomniauth/providers/github
+  # - go get github.com/stretchr/gomniauth/providers/google
+  # - go test
+  # - go build main.go auth.go client.go room.go

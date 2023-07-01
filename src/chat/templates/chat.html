@@ -1,20 +1,21 @@
 <html>
-
 <head>
     <title>チャットtest</title>
     <style>
         input { display: block;}
         ul { list-style: none;}
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://github.com/stretchr/objx"></script>
 </head>
 <body>
     <ul id="messages"></ul>
     WebSocketを使ったチャットアプリケーション
     <form id="chatbox">
+        {{.UserData.name}}<br/>
         <textarea></textarea>
         <input type="submit" value="送信"/>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
         $(function() {
             var socket = null;
